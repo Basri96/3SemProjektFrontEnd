@@ -1,6 +1,6 @@
 export interface recipe{
     id:number
     date:Date;
-    recipeIngredients:string;
+    recipeDescription:string;
     recipeTitle:string;
 }
