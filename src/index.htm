@@ -6,12 +6,27 @@
   <link rel="stylesheet" type="text/css" href="bundle.css">
 </head>
 
-<body>
-  <h1>Smart Bio Trashcan</h1> <br>
-  <div id="content"></div> <br>
-  <input id="weight" type="text"><br>
-  <button id="postWeight">Post Weight</button>
+<body> 
+   <div id="content"> </div>
+  <h1>Smart Bio Trashcan</h1>
+  <div id="btnDiv">
+    <div><button id="idagBtn" >Idag</button></div>
+    <div> <button id="ugeBtn">Uge</button></div>
+    <div><button id="madskriftBtn">Madopskrift Historik1</button></div>
+    <div>
+        <form>
+          <select name="Måned" id="">
+            <option>Måned</option>
+            <option>Gennemsnit</option>
+            <option>Madsplid</option>
+          </select>
+        </form>
+    </div>
+    <div><button id="årBtn">År</button></div> 
+  </div>
   
+    <div id="content"> </div>
+    
   <script src="bundle.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 export interface weight{
     id:number
-    date: string;
-    weight:string;
+    dato: string;
+    weightMeasure:string;
     
 }
