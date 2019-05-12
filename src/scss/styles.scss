@@ -1,23 +1,43 @@
-$fontColor: #0091aa;
-$colorHeading: #14be1c;
+//$fontColor: #0091aa;
+//$colorHeading: #14be1c;
 #content  // div with id: content
 {
-    color: $fontColor;
+    //color: $fontColor;
+    border-style: solid;
+    height: 400px;
+    width: 50%;
+     background-color: powderblue;
 }
 
+#wrapper
+{
+    
+    //text-align: center;
+    margin-left: 40px;
+}
+#title
+{
+    
+    //margin: 80px;
+}
+#insideTitle
+{
+
+}
 #btnDiv
 {
-    float: right;
-    border: 1px solid black;
-    outline-style: solid;
-    outline-color: red;
+    float: left;
+   // border: 1px solid black;
+   // outline-style: solid;
+    //outline-color: red;
 }
 
-h2
-{
-    color: $colorHeading;
-}
+//h2
+//{
+    //color: $colorHeading;
+//}
 
-h1{
-    @extend h2;
-}
+//h1{
+    //@extend h2;
+//}
+
