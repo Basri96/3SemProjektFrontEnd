@@ -7,12 +7,12 @@ let divElement : HTMLDivElement = <HTMLDivElement> document.getElementById("cont
 let idagBtn:HTMLButtonElement = <HTMLButtonElement> document.getElementById("idagBtn");
 let ugeBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("ugeBtn");
 
-
+ugeBtn.addEventListener('click', plotUge)
 idagBtn.addEventListener('click', plotIdag);
 
 function plotIdag():void{
 
-    axios.get<weight[]>("https://localhost:44355/api/weight/2")
+    axios.get<weight[]>("https://localhost:44355/api/weight/1")
     .then(function(response: AxiosResponse<weight[]>): void
     {
         console.log(response);
@@ -36,4 +36,28 @@ function plotIdag():void{
     console.log("er i slutning af getAllCustomers function");
 }
 
+function plotUge():void{
+
+    axios.get<weight[]>("https://localhost:44355/api/weight/2")
+    .then(function(response: AxiosResponse<weight[]>): void
+    {
+        console.log(response);
+
+        let result: string = "<ul>"
+        
+        response.data.forEach((weight: weight) => {
+            result += "<li>"+weight.id+" "+weight.dato+" "+weight.weightMeasure+"</li>"    
+        });
+        result +="</ul>"
+
+        divElement.innerHTML = result;
+    })
+    .catch(
+        function(error: AxiosError ): void{
+            console.log("errrrrrror in my code")
+            console.log(error);
+        }
+        
+    )   
+    console.log("er i slutning af getAllCustomers function");
 }
