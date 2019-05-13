@@ -6,9 +6,21 @@ import {weight} from "./weight"
 let divElement : HTMLDivElement = <HTMLDivElement> document.getElementById("content");
 let idagBtn:HTMLButtonElement = <HTMLButtonElement> document.getElementById("idagBtn");
 let ugeBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("ugeBtn");
-
+let Månedvalg = <>document.getElementById("Månedvalg")
 ugeBtn.addEventListener('click', plotUge)
 idagBtn.addEventListener('click', plotIdag);
+
+function MånedMuligehder(){
+    if(Månedvalg.value == "Måned"){
+
+    }
+    if(Månedvalg.value == "Gennemsnit"){
+
+    }
+    else if(Månedvalg.value == "Madsplid"){
+        
+    }
+}
 
 function plotIdag():void{
 
