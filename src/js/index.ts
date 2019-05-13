@@ -8,10 +8,13 @@ let idagBtn:HTMLButtonElement = <HTMLButtonElement> document.getElementById("ida
 let ugeBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("ugeBtn");
 let årBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("årBtn");
 let Månedvalg = <HTMLButtonElement>document.getElementById("Månedvalg")
+/** let Månedvalg = <>document.getElementById("Månedvalg") */
+ugeBtn.addEventListener('click', plotUge)
 idagBtn.addEventListener('click', plotIdag);
 ugeBtn.addEventListener('click', plotUge)
 årBtn.addEventListener('click', plotÅr)
 
+/*
 function MånedMuligehder(){
     if(Månedvalg.value == "Måned"){
 
@@ -22,7 +25,7 @@ function MånedMuligehder(){
     else if(Månedvalg.value == "Madsplid"){
         
     }
-}
+} */
 
 function plotIdag():void{
 
@@ -34,7 +37,7 @@ function plotIdag():void{
         let result: string = "<ul>"
         
         response.data.forEach((weight: weight) => {
-            result += "<li>"+weight.dato+" "+weight.weightMeasure+"</li>"    
+            result += "<li>"+"Dato:"+" "+weight.weightMeasure+" "+"Gram:"+" "+weight.dato+" </li>"    
         });
         result +="</ul>"
 
