@@ -6,10 +6,11 @@ import {weight} from "./weight"
 let divElement : HTMLDivElement = <HTMLDivElement> document.getElementById("content");
 let idagBtn:HTMLButtonElement = <HTMLButtonElement> document.getElementById("idagBtn");
 let ugeBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("ugeBtn");
-let Månedvalg = <>document.getElementById("Månedvalg")
+/** let Månedvalg = <>document.getElementById("Månedvalg") */
 ugeBtn.addEventListener('click', plotUge)
 idagBtn.addEventListener('click', plotIdag);
 
+/*
 function MånedMuligehder(){
     if(Månedvalg.value == "Måned"){
 
@@ -20,7 +21,7 @@ function MånedMuligehder(){
     else if(Månedvalg.value == "Madsplid"){
         
     }
-}
+} */
 
 function plotIdag():void{
 
@@ -32,7 +33,7 @@ function plotIdag():void{
         let result: string = "<ul>"
         
         response.data.forEach((weight: weight) => {
-            result += "<li>"+weight.id+" "+weight.dato+" "+weight.weightMeasure+"</li>"    
+            result += "<li>"+"Dato:"+" "+weight.weightMeasure+" "+"Gram:"+" "+weight.dato+" </li>"    
         });
         result +="</ul>"
 
