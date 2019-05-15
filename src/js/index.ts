@@ -10,6 +10,7 @@ let årBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("årB
 let månedsGennemsnitBtn = <HTMLButtonElement>document.getElementById("månedsGennemsnitBtn");
 let Månedvalg = <HTMLButtonElement>document.getElementById("Månedvalg");
 let ugensMaxBtn = <HTMLButtonElement>document.getElementById("størsteUge");
+let ugensMinBtn = <HTMLButtonElement>document.getElementById("mindsteUge");
 
 /** let Månedvalg = <>document.getElementById("Månedvalg") */
 
@@ -18,6 +19,7 @@ ugeBtn.addEventListener('click', plotUge)
 årBtn.addEventListener('click', plotÅr)
 månedsGennemsnitBtn.addEventListener('click', månedsGennemsnit);
 ugensMaxBtn.addEventListener("click",ugensMax);
+ugensMinBtn.addEventListener("click",ugensMin);
 /*
 let basket: number[] = [2,2,2,2];
 let sum1 = basket.reduce((a, b) => a + b, 0);
@@ -123,7 +125,30 @@ function ugensMax():void{
     console.log("er i slutning af getAllCustomers function");
 }
 
+function ugensMin():void{
+    
+    axios.get<weight[]>("https://localhost:44355/api/weight/2")
+    .then(function(response: AxiosResponse<weight[]>): void
+    {
+        console.log(response);
+        
+        let myList:weight[] = new Array;
+        myList =  response.data;
+        let sortedList = sortUgenEfterStørrelse(myList);
+        let mindsteDag = sortedList[0];
+        
 
+        divElement.innerHTML = "Dag: " + mindsteDag.weightMeasure.substring(0,10) +" "+"Vægt: "+ mindsteDag.dato;
+    })
+    .catch(
+        function(error: AxiosError ): void{
+            console.log("errrrrrror in my code")
+            console.log(error);
+        }
+        
+    )   
+    console.log("er i slutning af getAllCustomers function");
+}
 
 function månedsGennemsnit():void{
 
