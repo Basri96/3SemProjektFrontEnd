@@ -38,7 +38,7 @@ function MånedMuligehder(){
 
 function plotIdag():void{
 
-    axios.get<weight[]>("https://localhost:44355/api/weight/1")
+    axios.get<weight[]>("https://restsmarttrashservice.azurewebsites.net/api/weight/1")
     .then(function(response: AxiosResponse<weight[]>): void
     {
         console.log(response);
@@ -64,7 +64,7 @@ function plotIdag():void{
 
 function plotUge():void{
 
-    axios.get<weight[]>("https://localhost:44355/api/weight/2")
+    axios.get<weight[]>("https://restsmarttrashservice.azurewebsites.net/api/weight/2")
     .then(function(response: AxiosResponse<weight[]>): void
     {
         console.log(response);
@@ -90,7 +90,7 @@ function plotUge():void{
 
 function månedsGennemsnit():void{
 
-    axios.get<weight[]>("https://localhost:44355/api/weight/3")
+    axios.get<weight[]>("https://restsmarttrashservice.azurewebsites.net/api/weight/3")
     .then(function(response: AxiosResponse<weight[]>): void
     {
         console.log(response);
@@ -120,7 +120,7 @@ function månedsGennemsnit():void{
 
 function plotÅr():void{
 
-    axios.get<weight[]>("https://localhost:44355/api/weight/4")
+    axios.get<weight[]>("https://restsmarttrashservice.azurewebsites.net/api/weight/4")
     .then(function(response: AxiosResponse<weight[]>): void
     {
         console.log(response);
