@@ -10,6 +10,8 @@ let årBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("årB
 let månedsGennemsnitBtn = <HTMLButtonElement>document.getElementById("månedsGennemsnitBtn");
 let Månedvalg = <HTMLButtonElement>document.getElementById("Månedvalg");
 let notifikationDiv = <HTMLDivElement>document.getElementById("notifikation")
+let ugensMaxBtn = <HTMLButtonElement>document.getElementById("størsteUge");
+let ugensMinBtn = <HTMLButtonElement>document.getElementById("mindsteUge");
 
 /** let Månedvalg = <>document.getElementById("Månedvalg") */
 
@@ -24,6 +26,8 @@ madSpildFaldet();
 //nuværendeUge();
 
 
+ugensMaxBtn.addEventListener("click",ugensMax);
+ugensMinBtn.addEventListener("click",ugensMin);
 /*
 let basket: number[] = [2,2,2,2];
 let sum1 = basket.reduce((a, b) => a + b, 0);
@@ -85,6 +89,65 @@ function plotUge():void{
         result +="</ul>"
 
         divElement.innerHTML = result;
+    })
+    .catch(
+        function(error: AxiosError ): void{
+            console.log("errrrrrror in my code")
+            console.log(error);
+        }
+        
+    )   
+    console.log("er i slutning af getAllCustomers function");
+}
+
+function sortUgenEfterStørrelse(w : weight[]):weight[]{
+
+    let sortedList:weight[] = new Array;
+    /* sortere listen af weight objektor efter weight attributtet*/
+    sortedList = w.sort((n1,n2) => Number(n1.dato) - Number(n2.dato));
+
+    return sortedList;
+}
+
+function ugensMax():void{
+    
+    axios.get<weight[]>("https://localhost:44355/api/weight/2")
+    .then(function(response: AxiosResponse<weight[]>): void
+    {
+        console.log(response);
+        
+        let myList:weight[] = new Array;
+        myList =  response.data;
+        let sortedList = sortUgenEfterStørrelse(myList).reverse();
+        let størsteDag = sortedList[0];
+        
+
+        divElement.innerHTML = "Dag: " + størsteDag.weightMeasure.substring(0,10) +" "+"Vægt: "+ størsteDag.dato;
+    })
+    .catch(
+        function(error: AxiosError ): void{
+            console.log("errrrrrror in my code")
+            console.log(error);
+        }
+        
+    )   
+    console.log("er i slutning af getAllCustomers function");
+}
+
+function ugensMin():void{
+    
+    axios.get<weight[]>("https://localhost:44355/api/weight/2")
+    .then(function(response: AxiosResponse<weight[]>): void
+    {
+        console.log(response);
+        
+        let myList:weight[] = new Array;
+        myList =  response.data;
+        let sortedList = sortUgenEfterStørrelse(myList);
+        let mindsteDag = sortedList[0];
+        
+
+        divElement.innerHTML = "Dag: " + mindsteDag.weightMeasure.substring(0,10) +" "+"Vægt: "+ mindsteDag.dato;
     })
     .catch(
         function(error: AxiosError ): void{
