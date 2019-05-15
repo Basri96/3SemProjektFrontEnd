@@ -9,6 +9,7 @@ let ugeBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("ugeB
 let årBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("årBtn");
 let månedsGennemsnitBtn = <HTMLButtonElement>document.getElementById("månedsGennemsnitBtn");
 let Månedvalg = <HTMLButtonElement>document.getElementById("Månedvalg");
+let ugensMaxBtn = <HTMLButtonElement>document.getElementById("størsteUge");
 
 /** let Månedvalg = <>document.getElementById("Månedvalg") */
 
@@ -16,7 +17,7 @@ idagBtn.addEventListener('click', plotIdag);
 ugeBtn.addEventListener('click', plotUge)
 årBtn.addEventListener('click', plotÅr)
 månedsGennemsnitBtn.addEventListener('click', månedsGennemsnit);
-
+ugensMaxBtn.addEventListener("click",ugensMax);
 /*
 let basket: number[] = [2,2,2,2];
 let sum1 = basket.reduce((a, b) => a + b, 0);
@@ -87,6 +88,42 @@ function plotUge():void{
     )   
     console.log("er i slutning af getAllCustomers function");
 }
+
+function sortUgenEfterStørrelse(w : weight[]):weight[]{
+
+    let sortedList:weight[] = new Array;
+    /* sortere listen af weight objektor efter weight attributtet*/
+    sortedList = w.sort((n1,n2) => Number(n1.dato) - Number(n2.dato));
+
+    return sortedList;
+}
+
+function ugensMax():void{
+    
+    axios.get<weight[]>("https://localhost:44355/api/weight/2")
+    .then(function(response: AxiosResponse<weight[]>): void
+    {
+        console.log(response);
+        
+        let myList:weight[] = new Array;
+        myList =  response.data;
+        let sortedList = sortUgenEfterStørrelse(myList).reverse();
+        let størsteDag = sortedList[0];
+        
+
+        divElement.innerHTML = "Dag: " + størsteDag.weightMeasure.substring(0,10) +" "+"Vægt: "+ størsteDag.dato;
+    })
+    .catch(
+        function(error: AxiosError ): void{
+            console.log("errrrrrror in my code")
+            console.log(error);
+        }
+        
+    )   
+    console.log("er i slutning af getAllCustomers function");
+}
+
+
 
 function månedsGennemsnit():void{
 
