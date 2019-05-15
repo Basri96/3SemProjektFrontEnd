@@ -9,13 +9,20 @@ let ugeBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("ugeB
 let årBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("årBtn");
 let månedsGennemsnitBtn = <HTMLButtonElement>document.getElementById("månedsGennemsnitBtn");
 let Månedvalg = <HTMLButtonElement>document.getElementById("Månedvalg");
+let notifikationDiv = <HTMLDivElement>document.getElementById("notifikation")
 
 /** let Månedvalg = <>document.getElementById("Månedvalg") */
 
 idagBtn.addEventListener('click', plotIdag);
-ugeBtn.addEventListener('click', plotUge)
-årBtn.addEventListener('click', plotÅr)
+ugeBtn.addEventListener('click', plotUge);
+årBtn.addEventListener('click', plotÅr);
 månedsGennemsnitBtn.addEventListener('click', månedsGennemsnit);
+console.log("Hej")
+madSpildFaldet();
+//spildBedringTjek();
+//forgåendeUge();
+//nuværendeUge();
+
 
 /*
 let basket: number[] = [2,2,2,2];
@@ -35,6 +42,7 @@ function MånedMuligehder(){
         
     }
 } */
+
 
 function plotIdag():void{
 
@@ -143,3 +151,46 @@ function plotÅr():void{
     )   
     console.log("er i slutning af getAllCustomers function");
 }
+
+function madSpildFaldet():void{
+    let nuværendeUge: string | number
+    let forrigeUge
+    axios.get<weight[]>("https://localhost:44355/api/weight/2")
+    .then(function(response: AxiosResponse<weight[]>): void
+    {
+        console.log(response);
+        
+        let result: number[] = new Array;
+
+        response.data.forEach((weight: weight) => {
+            let gram = Number(weight.dato);
+            result.push(gram) 
+        });
+            /*gå igennem result listen og lægger tallene sammen */
+            nuværendeUge = result.reduce((a, b) => a + b, 0)
+            axios.get<weight[]>("https://localhost:44355/api/weight/5")
+            .then(function(response: AxiosResponse<weight[]>): void
+            {
+                console.log(response);
+                
+                let result: number[] = new Array;
+        
+                response.data.forEach((weight: weight) => {
+                    let gram = Number(weight.dato);
+                    result.push(gram) 
+                });
+                    /* gå igennem result listen og lægger tallene sammen */
+                    forrigeUge = result.reduce((a, b) => a + b, 0) 
+                    if(nuværendeUge>forrigeUge){
+                    notifikationDiv.innerHTML = "NOTIFIKATION: " + "Dit madspild er faldet: " + "Nuværende Uge: "+nuværendeUge+ " - " + "Forrige Uge: "+forrigeUge ;
+                    }
+                }) 
+
+    })
+   
+
+   
+
+    console.log("er i slutning af getAllCustomers function");
+}
+
