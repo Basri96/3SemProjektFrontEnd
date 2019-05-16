@@ -111,7 +111,7 @@ function sortUgenEfterStørrelse(w : weight[]):weight[]{
 
 function ugensMax():void{
     
-    axios.get<weight[]>("https://localhost:44355/api/weight/2")
+    axios.get<weight[]>("https://restsmarttrashservice.azurewebsites.net/api/weight/2")
     .then(function(response: AxiosResponse<weight[]>): void
     {
         console.log(response);
@@ -136,7 +136,7 @@ function ugensMax():void{
 
 function ugensMin():void{
     
-    axios.get<weight[]>("https://localhost:44355/api/weight/2")
+    axios.get<weight[]>("https://restsmarttrashservice.azurewebsites.net/api/weight/2")
     .then(function(response: AxiosResponse<weight[]>): void
     {
         console.log(response);
@@ -218,7 +218,7 @@ function plotÅr():void{
 function madSpildFaldet():void{
     let nuværendeUge: string | number
     let forrigeUge
-    axios.get<weight[]>("https://localhost:44355/api/weight/2")
+    axios.get<weight[]>("https://restsmarttrashservice.azurewebsites.net/api/weight/2")
     .then(function(response: AxiosResponse<weight[]>): void
     {
         console.log(response);
@@ -231,7 +231,7 @@ function madSpildFaldet():void{
         });
             /*gå igennem result listen og lægger tallene sammen */
             nuværendeUge = result.reduce((a, b) => a + b, 0)
-            axios.get<weight[]>("https://localhost:44355/api/weight/5")
+            axios.get<weight[]>("https://restsmarttrashservice.azurewebsites.net/api/weight/5")
             .then(function(response: AxiosResponse<weight[]>): void
             {
                 console.log(response);
