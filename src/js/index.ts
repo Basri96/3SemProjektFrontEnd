@@ -20,7 +20,7 @@ ugeBtn.addEventListener('click', plotUge);
 årBtn.addEventListener('click', plotÅr);
 månedsGennemsnitBtn.addEventListener('click', månedsGennemsnit);
 console.log("Hej")
-madSpildFaldet();
+setTimeout(madSpildFaldet,5000);
 //spildBedringTjek();
 //forgåendeUge();
 //nuværendeUge();
@@ -244,7 +244,7 @@ function madSpildFaldet():void{
                 });
                     /* gå igennem result listen og lægger tallene sammen */
                     forrigeUge = result.reduce((a, b) => a + b, 0) 
-                    if(nuværendeUge>forrigeUge){
+                    if(nuværendeUge<forrigeUge){
                     notifikationDiv.innerHTML = "NOTIFIKATION: " + "Dit madspild er faldet: " + "Nuværende Uge: "+nuværendeUge+ " - " + "Forrige Uge: "+forrigeUge ;
                     }
                 }) 
