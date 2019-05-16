@@ -58,7 +58,7 @@ function plotIdag():void{
         let result: string = "<ul>"
         
         response.data.forEach((weight: weight) => {
-            result += "<li>"+"Dato:"+" "+weight.weightMeasure+"&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;"+"Gram:"+" "+weight.dato+" </li>"    
+            result += "<li>"+"Dato:"+" "+weight.weightMeasure+"&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;"+"Vægt: "+" "+weight.dato+ " g" + "</li>"    
         });
         result +="</ul>"
 
@@ -84,7 +84,7 @@ function plotUge():void{
         let result: string = "<ul>"
         
         response.data.forEach((weight: weight) => {
-            result += "<li>"+"Dato: "+weight.weightMeasure+"&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;"+"Gram: "+weight.dato+" </li>"    
+            result += "<li>"+"Dato: "+weight.weightMeasure+"&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;"+"Vægt: "+weight.dato+ " g" + "</li>"    
         });
         result +="</ul>"
 
@@ -122,7 +122,7 @@ function ugensMax():void{
         let størsteDag = sortedList[0];
         
 
-        divElement.innerHTML = "Dag: " + størsteDag.weightMeasure.substring(0,10) +"&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;"+"Vægt: "+ størsteDag.dato;
+        divElement.innerHTML = "Dag: " + størsteDag.weightMeasure.substring(0,10) +"&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;"+"Vægt: "+ størsteDag.dato+" g";
     })
     .catch(
         function(error: AxiosError ): void{
@@ -147,7 +147,7 @@ function ugensMin():void{
         let mindsteDag = sortedList[0];
         
 
-        divElement.innerHTML = "Dag: " + mindsteDag.weightMeasure.substring(0,10) +"&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;"+"Vægt: "+ mindsteDag.dato;
+        divElement.innerHTML = "Dag: " + mindsteDag.weightMeasure.substring(0,10) +"&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;"+"Vægt: "+ mindsteDag.dato+" g";
     })
     .catch(
         function(error: AxiosError ): void{
@@ -177,7 +177,7 @@ function månedsGennemsnit():void{
        
        let myÅrMåned = (response.data[0].weightMeasure).substring(0,7);
         
-        divElement.innerHTML = "Måned: "+myÅrMåned+"&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;"+"Gennemsnits Madspild: "+String((sum/result.length).toFixed(2));
+        divElement.innerHTML = "Måned: "+myÅrMåned+"&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;"+"Gennemsnits Madspild: "+String((sum/result.length).toFixed(2)+" g");
     })
     .catch(
         function(error: AxiosError ): void{
@@ -199,7 +199,7 @@ function plotÅr():void{
         let result: string = "<ul>"
         
         response.data.forEach((weight: weight) => {
-            result += "<li>"+"Dato:"+" "+weight.weightMeasure+"&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;"+"Gram: "+""+weight.dato+""+"</li>"    
+            result += "<li>"+"Dato:"+" "+weight.weightMeasure+"&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;"+"Vægt: "+weight.dato+ " g" + "</li>"  
         });
         result +="</ul>"
 
@@ -245,7 +245,7 @@ function madSpildFaldet():void{
                     /* gå igennem result listen og lægger tallene sammen */
                     forrigeUge = result.reduce((a, b) => a + b, 0) 
                     if(nuværendeUge>forrigeUge){
-                    notifikationDiv.innerHTML = "NOTIFIKATION: &nbsp;&nbsp;" + "Dit madspild er faldet: &nbsp;&nbsp;" + "Nuværende Uge: "+nuværendeUge+ " &nbsp;- &nbsp;" + "Forrige Uge: "+forrigeUge ;
+                    notifikationDiv.innerHTML = "NOTIFIKATION: &nbsp;&nbsp;" + "Dit madspild er faldet: &nbsp;&nbsp;" + "Vægt for nuværende Uge: "+nuværendeUge+ " g"+" &nbsp;- &nbsp;" + "Vægt for forrige Uge: "+forrigeUge+ " g";
                     }
                 }) 
 
