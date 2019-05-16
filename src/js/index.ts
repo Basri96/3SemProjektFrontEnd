@@ -177,7 +177,7 @@ function månedsGennemsnit():void{
        
        let myÅrMåned = (response.data[0].weightMeasure).substring(0,7);
         
-        divElement.innerHTML = "Måned: "+myÅrMåned+"&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;"+"Gennemsnits Madspild: "+String(sum/result.length);
+        divElement.innerHTML = "Måned: "+myÅrMåned+"&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;"+"Gennemsnits Madspild: "+String((sum/result.length).toFixed(2));
     })
     .catch(
         function(error: AxiosError ): void{
