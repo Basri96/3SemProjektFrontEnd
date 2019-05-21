@@ -1,52 +1,108 @@
 import axios, { AxiosResponse, AxiosError } from "../../node_modules/axios/index"
-import {recipe} from "./recipe"
+import {Recipe} from "./Recipe"
 import {weight} from "./weight"
 
-
+// Html elementerne
 let divElement : HTMLDivElement = <HTMLDivElement> document.getElementById("content");
 let idagBtn:HTMLButtonElement = <HTMLButtonElement> document.getElementById("idagBtn");
 let ugeBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("ugeBtn");
 let årBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("årBtn");
 let månedsGennemsnitBtn = <HTMLButtonElement>document.getElementById("månedsGennemsnitBtn");
 let Månedvalg = <HTMLButtonElement>document.getElementById("Månedvalg");
-let notifikationDiv = <HTMLDivElement>document.getElementById("notifikation")
+let notifikationDiv = <HTMLDivElement>document.getElementById("notifikation");
 let ugensMaxBtn = <HTMLButtonElement>document.getElementById("størsteUge");
 let ugensMinBtn = <HTMLButtonElement>document.getElementById("mindsteUge");
+let getRecipeBtn = <HTMLButtonElement>document.getElementById("getRecipeBtn");
+let searchRecipe = <HTMLInputElement>document.getElementById("searchRecipe");
+let madOpskriftHistoBtn = <HTMLButtonElement>document.getElementById("madOpskriftBtn");
 
-/** let Månedvalg = <>document.getElementById("Månedvalg") */
-
+//knappernes event listeners
+getRecipeBtn.addEventListener('click', getRecipe);
 idagBtn.addEventListener('click', plotIdag);
 ugeBtn.addEventListener('click', plotUge);
 årBtn.addEventListener('click', plotÅr);
 månedsGennemsnitBtn.addEventListener('click', månedsGennemsnit);
-console.log("Hej")
-setTimeout(madSpildFaldet,5000);
-//spildBedringTjek();
-//forgåendeUge();
-//nuværendeUge();
-
-
 ugensMaxBtn.addEventListener("click",ugensMax);
 ugensMinBtn.addEventListener("click",ugensMin);
-/*
-let basket: number[] = [2,2,2,2];
-let sum1 = basket.reduce((a, b) => a + b, 0);
-console.log(sum1/basket.length);
-*/
+madOpskriftHistoBtn.addEventListener("click",getAllRecipes);
 
-/*
-function MånedMuligehder(){
-    if(Månedvalg.value == "Måned"){
+//funktioner der skal køres ved execution
+console.log("Hej")
+setTimeout(madSpildFaldet,1000);
 
-    }
-    if(Månedvalg.value == "Gennemsnit"){
+//Api id og key
+let Api_id = "766e4b4b"
+let ApiKey = "7e6955147a2399b858406e2993bbdbd2";
 
-    }
-    else if(Månedvalg.value == "Madsplid"){
+//variable til at indholde brugers opskrift søg ord. 
+let ApiKeyword = "";
+
+//variable der indholder den aktuelle tid og dato
+let dateTimeNow = new Date().toLocaleString();
+
+
+function getAllRecipes():void{
+    
+    axios.get<Recipe[]>("https://restsmarttrashservice.azurewebsites.net/api/recipe")
+    .then(function(response: AxiosResponse<Recipe[]>): void
+    {
+        console.log(response);
+
+        let result: string = "<ul>"
         
-    }
-} */
+        response.data.forEach((recipe: Recipe) => {
+            result += "<li>"+"Dato:"+" "+recipe.dato+"&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;"+"Opskrift: "+" "+recipe.recipe+"</li>"    
+        });
+        result +="</ul>"
 
+        divElement.innerHTML = result;
+    })
+    .catch(
+        function(error: AxiosError ): void{
+            console.log("errrrrrror in my code")
+            console.log(error);
+        }
+        
+    )   
+    console.log("er i slutning af getAllRecipes function");
+
+}
+
+//funktion til at poste en opskrift til databasen
+function postRecipe(dato1:string, recipe1:string):void{   
+
+    axios.post<Recipe>("https://restsmarttrashservice.azurewebsites.net/api/recipe",
+                    {dato:dato1, recipe: recipe1})
+        .then(function (response:AxiosResponse):void{
+            console.log("status koden er:" + response.status)    
+        })
+        .catch(function(error: AxiosError):void{
+
+        })
+}
+
+//funktion til at hente en opskrift fra tredjeparts API'en
+function getRecipe():void{
+    ApiKeyword = searchRecipe.value;
+    axios.get<object>("https://api.edamam.com/search?q="+ApiKeyword+"&app_id="+Api_id+"&app_key="+ApiKey+"&from=0&to=1")
+    .then(function(response: AxiosResponse<object>): void
+    {
+        console.log(response);
+        //konvertere responsen til string ved hjælp af JSON.stringify
+        let voresData:string = JSON.stringify(response.data);
+        divElement.innerHTML = voresData;
+        //poster opskriften straks til databasen
+        postRecipe(dateTimeNow,voresData);
+    })
+    .catch(
+        function(error: AxiosError ): void{
+            console.log("errrrrrror in my code")
+            console.log(error);
+        }
+        
+    )   
+    console.log("er i slutning af getRecipe function");
+}
 
 function plotIdag():void{
 

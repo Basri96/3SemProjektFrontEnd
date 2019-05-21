@@ -1,6 +1,5 @@
-export interface recipe{
+export interface Recipe{
     id:number
-    date:Date;
-    recipeDescription:string;
-    recipeTitle:string;
+    dato: string;
+    recipe:string;    
 }
