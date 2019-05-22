@@ -40,7 +40,7 @@ let ApiKeyword = "";
 //variable der indholder den aktuelle tid og dato
 let dateTimeNow = new Date().toLocaleString();
 
-
+//al &nbsp; står for non breaking space, så hvis man skal have flere mellemrum i en string bliver det ikke slettet.
 function getAllRecipes():void{
     
     axios.get<Recipe[]>("https://restsmarttrashservice.azurewebsites.net/api/recipe")
@@ -281,6 +281,7 @@ function plotÅr():void{
 }
 
 function madSpildFaldet():void{
+    //nuværende uge sat til bøde string og number da den ikke godtog andet.
     let nuværendeUge: string | number
     let forrigeUge
     axios.get<weight[]>("https://restsmarttrashservice.azurewebsites.net/api/weight/2")
@@ -309,10 +310,13 @@ function madSpildFaldet():void{
                 });
                     /* gå igennem result listen og lægger tallene sammen */
                     forrigeUge = result.reduce((a, b) => a + b, 0) 
-                    if(nuværendeUge<forrigeUge){
+                    if(nuværendeUge<forrigeUge)
+                    //hvis nuværende ug er mindre end forrige uge viser den en besked med ens madspild er faldet
+                    {
                     notifikationDiv.innerHTML = "NOTIFIKATION: &nbsp;&nbsp;" + "Dit madspild er faldet: &nbsp;&nbsp;" + "Vægt for nuværende Uge: "+nuværendeUge+ " g"+" &nbsp;- &nbsp;" + "Vægt for forrige Uge: "+forrigeUge+ " g";
                     }
                     else
+                    //hvis nuværende uge er større end forrige uge viser den ikke noget
                     {
                         notifikationDiv.innerHTML = null;
                     }
