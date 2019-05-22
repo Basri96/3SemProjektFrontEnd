@@ -312,6 +312,10 @@ function madSpildFaldet():void{
                     if(nuværendeUge<forrigeUge){
                     notifikationDiv.innerHTML = "NOTIFIKATION: &nbsp;&nbsp;" + "Dit madspild er faldet: &nbsp;&nbsp;" + "Vægt for nuværende Uge: "+nuværendeUge+ " g"+" &nbsp;- &nbsp;" + "Vægt for forrige Uge: "+forrigeUge+ " g";
                     }
+                    else
+                    {
+                        notifikationDiv.innerHTML = null;
+                    }
                 }) 
 
     })
