@@ -90,10 +90,13 @@ function getRecipe():void{
         console.log(response);
         //konvertere responsen til string ved hjælp af JSON.stringify
         let voresData:string = JSON.stringify(response.data);
+        //det første og andet ord hvor response string skal splittes
         let firstWord = "\"ingredientLines";
         let secondWord = "\"ingredients\"";
+        //index på respektiv splitte orde
         let index1 = voresData.indexOf(firstWord);
         let index2 = voresData.indexOf(secondWord);
+        
         let newData = voresData.substring(index1,index2);
 
         divElement.innerHTML = newData;
